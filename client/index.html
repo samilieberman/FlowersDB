@@ -29,9 +29,9 @@
     <thead>
     <tr>
         <th>Name</th>
-        <th>Date</th>
-        <th>Location</th>
         <th>Sighted By</th>
+        <th>Location</th>
+        <th>Date</th>
         <th> </th>
 
     </tr>
@@ -39,28 +39,76 @@
 
     <tbody>
     <tr>
-        <td>Daisy</td>
-        <td>12/07/2018</td>
-        <td>Gainesville</td>
-        <td>Alvin</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
+        <td id = "tableName">Daisy</td>
+        <td id = "tablePerson">Alvin</td>
+        <td id = "tableLocation">Gainesville</td>
+        <td id = "tableDate">12/07/2018</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a></td>
     </tr>
-    <tr>
+<!--    <tr>
         <td>Rose</td>
-        <td>12/07/2018</td>
+        <td>Sam</td>
         <td>Miami</td>
-        <td>Alvin</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
+        <td>12/07/2018</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a></td>
     </tr>
     <tr>
         <td>Sunflower</td>
-        <td>12/07/2018</td>
-        <td>New York</td>
         <td>Jonathan</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
-    </tr>
+        <td>New York</td>
+        <td>12/07/2018</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a></td>
+    </tr>-->
     </tbody>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
+            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
+            <form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="editName" type="text" class="validate" value="">
+                        <!--<label for="name">Name</label>-->
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('editName').value = document.getElementById('tableName').innerHTML;
+                </script>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">person</i>
+                        <input id="editPerson" type="text" class="validate" value="">
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('editPerson').value = document.getElementById('tablePerson').innerHTML;
+                </script>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">location_on</i>
+                        <input id="editLocation" type="text" class="validate" value="">
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('editLocation').value = document.getElementById('tableLocation').innerHTML;
+                </script>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <input id="editDate" type="text" class="datepicker" value="">
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('editDate').value = document.getElementById('tableDate').innerHTML;
+                </script>
+                <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">check</i></a>
+
+            </form>
+        </div>
+    </div>
 </table>
+
 <br>
 <a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px;"><i class="material-icons">add</i></a>
     <!-- Modal Structure -->
@@ -144,7 +192,10 @@
             container: 'body'
         })
     });
-
+    $('#editname').attr('placeholder','Name1');
+    $('#editperson').attr('placeholder','Person1');
+    $('#editlocation').attr('placeholder','Location1');
+    $('#editdate').attr('placeholder','Date1');
 
 </script>
 </body>
