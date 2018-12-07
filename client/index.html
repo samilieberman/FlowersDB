@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flowers Database</title>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav class="black">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href = "img/favicon.ico"></a>
+                <a href="#!" class="brand-logo"><i class="material-icons">filter_vintage</i>Flowers Database</a>
+                <ul class="right hide-on-med-and-down" id="navList">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<main>
+<table class = "centered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Sighted By</th>
+        <th> </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>Daisy</td>
+        <td>12/07/2018</td>
+        <td>Gainesville</td>
+        <td>Alvin</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
+    </tr>
+    <tr>
+        <td>Rose</td>
+        <td>12/07/2018</td>
+        <td>Miami</td>
+        <td>Alvin</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
+    </tr>
+    <tr>
+        <td>Sunflower</td>
+        <td>12/07/2018</td>
+        <td>New York</td>
+        <td>Jonathan</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small waves-effect waves-light yellow"><i class="material-icons">edit</i></a></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px;"><i class="material-icons">add</i></a>
+    <!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
+        <h5><span style="font-size: 18px">Insert into the Sightings database...</span></h5>
+        <form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="name" placeholder="Name" type="text" class="validate">
+                    <!--<label for="name">Name</label>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">person</i>
+                    <input id="person" placeholder="Person" type="text" class="validate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">location_on</i>
+                    <input id="location" placeholder="Location" type="text" class="validate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    <input id="date" placeholder="Date" type="text" class="datepicker">
+                </div>
+            </div>
+            <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">check</i></a>
+
+        </form>
+    </div>
+</div>
+<br><br>
+</main>
+<footer class="section page-footer black">
+    <div class="container center-align"> Created by: Samantha Lieberman and Daniel Tymecki </div>
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, options);
+    });
+
+    // Or with jQuery
+
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, options);
+    });
+
+    // Or with jQuery
+
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, options);
+    });
+
+    // Or with jQuery
+
+    $(document).ready(function(){
+        $('.datepicker').datepicker();
+    });
+    $(document).ready(function(){
+        $('.modal').modal();
+        $('.datepicker').datepicker({
+            container: 'body'
+        })
+    });
+
+
+</script>
+</body>
+</html>

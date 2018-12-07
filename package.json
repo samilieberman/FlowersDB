@@ -1,0 +1,12 @@
+{
+  "name": "Assignment5",
+  "version": "1.0.0",
+  "dependencies": {},
+  "scripts": {
+    "start": "npm run open",
+    "open": "concurrently \"http-server -a localhost -p 8080\" \"open http://localhost:8080/client/index.html\""
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
