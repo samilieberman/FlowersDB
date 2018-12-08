@@ -15,10 +15,23 @@
             <div class="nav-wrapper">
                 <a href = "img/favicon.ico"></a>
                 <a href="#!" class="brand-logo"><i class="material-icons">filter_vintage</i>Flowers Database</a>
+
                 <ul class="right hide-on-med-and-down" id="navList">
                     <li><a href="#">Home</a></li>
                     <li><a href="login.html">Login</a></li>
                     <li><a href="register.html">Register</a></li>
+                    <li>
+                        <div class="center row">
+                            <div class="col s12 " >
+                                <div class="row" id="topbarsearch">
+                                    <div class="input-field col s6 s12 light-blue-text">
+                                        <!--<i class="white-text material-icons prefix">search</i>-->
+                                        <input type="text" placeholder="Search" id="autocomplete-input" class="autocomplete white-text" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -43,7 +56,10 @@
         <td id = "tablePerson">Alvin</td>
         <td id = "tableLocation">Gainesville</td>
         <td id = "tableDate">12/07/2018</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>  <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a></td>
+        <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
+            <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
+            <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
+        </td>
     </tr>
 <!--    <tr>
         <td>Rose</td>
@@ -65,46 +81,46 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
             <form>
-                <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="editName" type="text" class="validate" value="">
                         <!--<label for="name">Name</label>-->
                     </div>
-                </div>
                 <script>
                     document.getElementById('editName').value = document.getElementById('tableName').innerHTML;
                 </script>
-                <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">person</i>
                         <input id="editPerson" type="text" class="validate" value="">
                     </div>
-                </div>
                 <script>
                     document.getElementById('editPerson').value = document.getElementById('tablePerson').innerHTML;
                 </script>
-                <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">location_on</i>
                         <input id="editLocation" type="text" class="validate" value="">
                     </div>
-                </div>
                 <script>
                     document.getElementById('editLocation').value = document.getElementById('tableLocation').innerHTML;
                 </script>
-                <div class="row">
                     <div class="input-field col s6">
                         <i class="material-icons prefix">date_range</i>
                         <input id="editDate" type="text" class="datepicker" value="">
                     </div>
-                </div>
                 <script>
                     document.getElementById('editDate').value = document.getElementById('tableDate').innerHTML;
                 </script>
-                <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">check</i></a>
-
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Update
+                    <!--<i class="material-icons right">update</i>-->
+                </button>
             </form>
+        </div>
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
+            <h5><span style="font-size: 18px">Picture</span></h5>
+            <img src = "img/flowers2.jpg" alt="Flower pic" height="400" width="650">
         </div>
     </div>
 </table>
@@ -117,33 +133,25 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
         <h5><span style="font-size: 18px">Insert into the Sightings database...</span></h5>
         <form>
-            <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">account_circle</i>
                     <input id="name" placeholder="Name" type="text" class="validate">
                     <!--<label for="name">Name</label>-->
                 </div>
-            </div>
-            <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">person</i>
                     <input id="person" placeholder="Person" type="text" class="validate">
                 </div>
-            </div>
-            <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
                     <input id="location" placeholder="Location" type="text" class="validate">
                 </div>
-            </div>
-            <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">date_range</i>
                     <input id="date" placeholder="Date" type="text" class="datepicker">
                 </div>
-            </div>
-            <a class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">check</i></a>
-
+            <button class="btn waves-effect waves-light green" type="submit" name="action">Insert
+            </button>
         </form>
     </div>
 </div>
