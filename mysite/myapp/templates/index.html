@@ -50,9 +50,9 @@
     <thead>
     <tr>
         <th>Name</th>
-<!--         <th>Sighted By</th>
+        <th>Sighted By</th>
         <th>Location</th>
-        <th>Date</th> -->
+        <th>Date</th>
         <th> </th>
 
     </tr>
@@ -63,23 +63,21 @@
             {% for sighting in latest_sightings %}
             <tr>
             <td id = "tableName">{{ sighting.name }}</td>
-            <!-- <td id = "tablePerson">{{ sighting.person }}</td>
+            <td id = "tablePerson">{{ sighting.person }}</td>
             <td id = "tableLocation">{{ sighting.location }}</td>
-            <td id = "tableDate">{{ sighting.sighted }}</td> -->
-            <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal4"><i class="material-icons">format_list_bulleted</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light purple" href="#modal3"><i class="material-icons">photo_library</i></a>
-
+            <td id = "tableDate">{{ sighting.sighted }}</td>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sighting.id %}"><i class="material-icons">delete</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal4"><i class="material-icons">edit</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
             </td>
             </tr>
             {% endfor %}
     {% endif %}
     </tbody>
-    <div id="modal2" class="modal">
-        <div class="modal-content">     
+    <div id="modal4" class="modal">
+        <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
-            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>  
+            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
             <form method="put">
                 {% csrf_token %}
                 {{up_form.as_p}}
@@ -124,21 +122,6 @@
             <img src = "{% static "myapp/img/flowers2.jpg" %}" alt="Flower pic" height="400" width="650">
         </div>
     </div>
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
-            <h5><span style="font-size: 18px">10 Most Recent Sightings</span></h5>
-            {% if latest_sightings %}
-                {% for sighting in latest_sightings %}
-            <ul>
-                <li> <b>Person: </b> {{ sighting.person }} </li>
-                <li> <b>Location: </b> {{ sighting.location }} </li>
-                <li> <b>Date: </b> {{ sighting.sighted }} </li>
-            </ul>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
 </table>
 
 <br>
@@ -148,7 +131,7 @@
     <div class="modal-content">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
         <h5><span style="font-size: 18px">Insert into the Sightings database...</span></h5>
-        <form method="post" id = "insertForm">
+        <form method="post">
             {% csrf_token %}
             {{form.as_p}}
             <button class="btn waves-effect waves-light green" type="submit" name="action">Insert

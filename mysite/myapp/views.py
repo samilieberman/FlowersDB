@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import get_object_or_404, render, render_to_response
+from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from myapp.models import *
 from .forms import *
 from django.contrib.auth import login, authenticate, logout
@@ -40,7 +40,7 @@ def index(request):
         form2 = UpdateForm(prefix='update')
 
     latest_sightings = Sightings.objects.all()
-    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form':form2}
+    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
     return render(request, 'index.html', context)
 
 def insert(request):
@@ -60,3 +60,16 @@ def signup(request):
     else:
         r_form = UserCreationForm()
     return render(request, 'register.html', {'form3': r_form})
+
+def delete(request, id=None):
+    print(id)
+    inst = Sightings.objects.filter(id=id)
+    inst.delete()
+    return redirect("index")
+
+
+def update(request, id=None):
+    print(id)
+    inst = Sightings.objects.filter(id=id)
+    inst.update()
+    return redirect("index")
