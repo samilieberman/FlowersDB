@@ -67,14 +67,15 @@
             <td id = "tableLocation">{{ sighting.location }}</td>
             <td id = "tableDate">{{ sighting.sighted }}</td>
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sighting.id %}"><i class="material-icons">delete</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal4"><i class="material-icons">edit</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light pink" href="#modal4"><i class="material-icons">format_list_bulleted</i></a>
             </td>
             </tr>
             {% endfor %}
     {% endif %}
     </tbody>
-    <div id="modal4" class="modal">
+    <div id="modal2" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
@@ -85,41 +86,29 @@
             </form>
         </div>
     </div>
-                    <!--<div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="editName" type="text" class="validate" value="">
-                        <!--<label for="name">Name</label>
-                    </div>
-                <script>
-                    document.getElementById('editName').value = document.getElementById('tableName').innerHTML;
-                </script>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">person</i>
-                        <input id="editPerson" type="text" class="validate" value="">
-                    </div>
-                <script>
-                    document.getElementById('editPerson').value = document.getElementById('tablePerson').innerHTML;
-                </script>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">location_on</i>
-                        <input id="editLocation" type="text" class="validate" value="">
-                    </div>
-                <script>
-                    document.getElementById('editLocation').value = document.getElementById('tableLocation').innerHTML;
-                </script>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">date_range</i>
-                        <input id="editDate" type="text" class="datepicker" value="">
-                    </div>
-                <script>
-                    document.getElementById('editDate').value = document.getElementById('tableDate').innerHTML;
-                </script>-->
+                   
     <div id="modal3" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Picture</span></h5>
             {% load static %}
             <img src = "{% static "myapp/img/flowers2.jpg" %}" alt="Flower pic" height="400" width="650">
+        </div>
+    </div>
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
+            <h5><span style="font-size: 18px">10 Most Recent Sightings</span></h5>
+            {% if latest_sightings %}
+            {% for sighting in latest_sightings %}
+            <ul>
+                <li><b>Flower: </b> {{ sighting.name }}</li>
+                <li><b>Person: </b> {{ sighting.person }}</li>
+                <li><b>Location: </b> {{ sighting.location }}</li>
+                <li><b>Date Sighted: </b> {{ sighting.sighted }}</li>
+            </ul>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </table>
