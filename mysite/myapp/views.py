@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import get_object_or_404, render, render_to_response
+from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from myapp.models import *
 from .forms import *
 # Create your views here.
@@ -36,8 +36,9 @@ def index(request):
         form2 = UpdateForm(prefix='update')
 
     latest_sightings = Sightings.objects.all()
-    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form':form2}
+    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
     return render(request, 'index.html', context)
+
 
 def login(request):
     return render_to_response('login.html')
@@ -50,3 +51,17 @@ def register(request):
 def insert(request):
     form = InsertForm()
     return render(request, 'insert.html', {'form': form})
+
+
+def delete(request, id=None):
+    print(id)
+    inst = Sightings.objects.filter(id=id)
+    inst.delete()
+    return redirect("index")
+
+
+def update(request, id=None):
+    print(id)
+    inst = Sightings.objects.filter(id=id)
+    inst.update()
+    return redirect("index")

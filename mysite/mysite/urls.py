@@ -20,5 +20,7 @@ from myapp import views as v
 urlpatterns = [
     url(r'^login/', v.login, name='login'),
     url(r'^register/', v.register, name='register'),
+    url(r'^(?P<id>\d+)/delete/$', v.delete, name='delete'),
+    url(r'^(?P<id>\d+)/update/$', v.update, name='update'),
     url(r'', include('myapp.urls')),
 ]

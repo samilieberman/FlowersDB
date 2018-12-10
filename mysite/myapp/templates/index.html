@@ -59,7 +59,7 @@
             <td id = "tablePerson">{{ sighting.person }}</td>
             <td id = "tableLocation">{{ sighting.location }}</td>
             <td id = "tableDate">{{ sighting.sighted }}</td>
-            <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
+            <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sighting.id %}"><i class="material-icons">delete</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal4"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
             </td>
@@ -68,9 +68,9 @@
     {% endif %}
     </tbody>
     <div id="modal4" class="modal">
-        <div class="modal-content">     
+        <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
-            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>  
+            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
             <form method="put">
                 {% csrf_token %}
                 {{up_form.as_p}}
