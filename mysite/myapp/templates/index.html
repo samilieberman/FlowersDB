@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
+    {% load static %}
+    <link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
 </head>
 <body>
 <div class="navbar-fixed">
@@ -59,22 +60,28 @@
             <td id = "tableLocation">{{ sighting.location }}</td>
             <td id = "tableDate">{{ sighting.sighted }}</td>
             <td><a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal4"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
             </td>
             </tr>
             {% endfor %}
     {% endif %}
     </tbody>
-    <div id="modal2" class="modal">
-        <div class="modal-content">
+    <div id="modal4" class="modal">
+        <div class="modal-content">     
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
-            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
-            <form>
-                    <div class="input-field col s6">
+            <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>  
+            <form method="put">
+                {% csrf_token %}
+                {{up_form.as_p}}
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
+            </form>
+        </div>
+    </div>
+                    <!--<div class="input-field col s6">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="editName" type="text" class="validate" value="">
-                        <!--<label for="name">Name</label>-->
+                        <!--<label for="name">Name</label>
                     </div>
                 <script>
                     document.getElementById('editName').value = document.getElementById('tableName').innerHTML;
@@ -99,18 +106,13 @@
                     </div>
                 <script>
                     document.getElementById('editDate').value = document.getElementById('tableDate').innerHTML;
-                </script>
-                <button class="btn waves-effect waves-light green" type="submit" name="action">Update
-                    <!--<i class="material-icons right">update</i>-->
-                </button>
-            </form>
-        </div>
-    </div>
+                </script>-->
     <div id="modal3" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Picture</span></h5>
-            <img src = "img/flowers2.jpg" alt="Flower pic" height="400" width="650">
+            {% load static %}
+            <img src = "{% static "myapp/img/flowers2.jpg" %}" alt="Flower pic" height="400" width="650">
         </div>
     </div>
 </table>
@@ -124,7 +126,7 @@
         <h5><span style="font-size: 18px">Insert into the Sightings database...</span></h5>
         <form method="post">
             {% csrf_token %}
-            {{form}}
+            {{form.as_p}}
             <button class="btn waves-effect waves-light green" type="submit" name="action">Insert
             </button>
         </form>
