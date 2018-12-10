@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from myapp import views as v
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url(r'^login/', v.login, name='login'),
-    url(r'^register/', v.register, name='register'),
+    url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^register/', v.signup, name='register'),
     url(r'^(?P<id>\d+)/delete/$', v.delete, name='delete'),
     url(r'^(?P<id>\d+)/update/$', v.update, name='update'),
     url(r'', include('myapp.urls')),

@@ -4,4 +4,5 @@ from myapp import views as v
 
 urlpatterns = [
     url(r'$', v.index, name='index'),
+    # url(r'^register/$', v.register, name='register'),
 ]
