@@ -4,6 +4,10 @@ from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render, render_to_response
 from myapp.models import *
 from .forms import *
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
 # Create your views here.
 
 
@@ -39,14 +43,20 @@ def index(request):
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form':form2}
     return render(request, 'index.html', context)
 
-def login(request):
-    return render_to_response('login.html')
-
-
-def register(request):
-    return render_to_response('register.html')
-
-
 def insert(request):
     form = InsertForm()
     return render(request, 'insert.html', {'form': form})
+
+def signup(request):
+    if request.method == 'POST':
+        r_form = UserCreationForm(request.POST)
+        if r_form.is_valid():
+            r_form.save()
+            username = r_form.cleaned_data.get('username')
+            raw_password = r_form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        r_form = UserCreationForm()
+    return render(request, 'register.html', {'form3': r_form})

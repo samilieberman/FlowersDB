@@ -18,21 +18,28 @@
                 <a href="#!" class="brand-logo"><i class="material-icons">filter_vintage</i>Flowers Database</a>
 
                 <ul class="right hide-on-med-and-down" id="navList">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
-                    <li>
+                    <!--<li><a href="#">Home</a></li>-->
+                    {% if request.user.is_authenticated %}
+                    <strong><li>Logged in as: {{request.user.username}}</li></strong>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+
+                    <!--<li>
                         <div class="center row">
                             <div class="col s12 " >
                                 <div class="row" id="topbarsearch">
                                     <div class="input-field col s6 s12 light-blue-text">
-                                        <!--<i class="white-text material-icons prefix">search</i>-->
+                                        <i class="white-text material-icons prefix">search</i>
                                         <input type="text" placeholder="Search" id="autocomplete-input" class="autocomplete white-text" >
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

@@ -46,40 +46,23 @@
         <div class="section"></div>
 
         <div class="container">
-            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 25px 100px 0px 100px; border: 1px solid #EEE;">
-
-                <form class="col s12" method="post" id="form">
-                    <div class='row'>
-                        <div class='col s12'>
-                        </div>
-                    </div>
-                    <h5 class="light-blue-text">Login</h5>
-                    <br>
+            <div class="container">
+                {% block title %}Login{% endblock %}
+                {% block content %}
+                <form class="col s6" method="post" id="login">
+                     {% csrf_token %}
+                     {{ form.as_p }}
 
                     <div class='row'>
-                        <div class='input-field col s12'>
-                            <input class='validate' type='email' name='password' id='username' />
-                            <label for='username'>Enter your username</label>
-                        </div>
+                        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect light-blue'>Login</button>
                     </div>
                     <div class='row'>
-                        <div class='input-field col s12'>
-                            <input class='validate' type='password' name='password' id='password' />
-                            <label for='password'>Enter your password</label>
-                        </div>
+                        <a href="{% url 'index' %}" class="waves-effect waves-effect light-blue btn">Back</a>
                     </div>
-
-                    <br />
-
-                        <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect light-blue'>Login</button>
-                        </div>
-                        <div class='row'>
-                            <a href="{% url 'index' %}" class="waves-effect waves-effect light-blue btn">Back</a>
-                        </div>
-                    <!--<a href="register.html">Create account</a>-->
                 </form>
-            </div>
+                {% endblock %}
+                <div class="section"></div>
+                <div class="section"></div>
         </div>
 
     </div>
