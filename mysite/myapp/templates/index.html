@@ -47,13 +47,22 @@
     </nav>
 </div>
 <main>
-<table class = "centered">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field" onkeyup='searchTable()'>
+          <input id="search" type="search" placeholder="Search for a flower name..." required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+<table class = "centered" id = "table">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Sighted By</th>
+        <th>Flower Name</th>
+<!--         <th>Sighted By</th>
         <th>Location</th>
-        <th>Date</th>
+        <th>Date</th> -->
         <th> </th>
 
     </tr>
@@ -64,9 +73,9 @@
             {% for sighting in latest_sightings %}
             <tr>
             <td id = "tableName">{{ sighting.name }}</td>
-            <td id = "tablePerson">{{ sighting.person }}</td>
+<!--             <td id = "tablePerson">{{ sighting.person }}</td>
             <td id = "tableLocation">{{ sighting.location }}</td>
-            <td id = "tableDate">{{ sighting.sighted }}</td>
+            <td id = "tableDate">{{ sighting.sighted }}</td> -->
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sighting.id %}"><i class="material-icons">delete</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
@@ -137,6 +146,30 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+function searchTable() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    console.log("the length is: tr.length");
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.modal');
