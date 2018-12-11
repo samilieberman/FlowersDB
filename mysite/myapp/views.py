@@ -25,9 +25,8 @@ def index(request):
     else:
         form = InsertForm(prefix='insert')
 
-    if request.method == 'PUT' and not form.is_valid():
+    if request.method == 'PUT':
         form2 = UpdateForm(request.PUT, prefix='update')
-        form = BannedPhraseForm(prefix='insert')
         if form2.is_valid():
             name = form2.cleaned_data['name']
             person = form2.cleaned_data['person']

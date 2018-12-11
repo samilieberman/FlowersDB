@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Flowers Database</title>
-    <link rel="stylesheet" href="style/main.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "myapp/style/main.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% load static %}
@@ -11,7 +12,7 @@
 </head>
 <body>
 <div class="navbar-fixed">
-    <nav class="black">
+    <nav class="grey darken-3">
         <div class="container">
             <div class="nav-wrapper">
                 <a href = "img/favicon.ico"></a>
@@ -130,7 +131,7 @@
 </div>
 <br><br>
 </main>
-<footer class="section page-footer black">
+<footer class="section page-footer grey darken-3">
     <div class="container center-align"> Created by: Samantha Lieberman and Daniel Tymecki </div>
 </footer>
 </body>
