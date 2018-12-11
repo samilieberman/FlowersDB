@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^register/', v.signup, name='register'),
+    url(r'^upload/', v.upload, name='upload'),
     url(r'^(?P<id>\d+)/delete/$', v.delete, name='delete'),
     url(r'^(?P<id>\d+)/update/$', v.update, name='update'),
     url(r'', include('myapp.urls')),

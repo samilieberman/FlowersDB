@@ -7,6 +7,8 @@ from .forms import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from tablib import Dataset
+from myapp.resources import *
 
 # Create your views here.
 
@@ -72,3 +74,17 @@ def update(request, id=None):
     inst = Sightings.objects.filter(id=id)
     inst.update()
     return redirect("index")
+
+def upload(request):
+    if request.method == 'POST':
+        person_resource = SightingResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'upload.html')
