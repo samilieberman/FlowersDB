@@ -49,6 +49,7 @@
 <table class = "centered">
     <thead>
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Sighted By</th>
         <th>Location</th>
@@ -62,6 +63,7 @@
         {% if latest_sightings %}
             {% for sighting in latest_sightings %}
             <tr>
+            <td id = "tableId">{{ sighting.id }}</td>
             <td id = "tableName">{{ sighting.name }}</td>
             <td id = "tablePerson">{{ sighting.person }}</td>
             <td id = "tableLocation">{{ sighting.location }}</td>
@@ -72,21 +74,21 @@
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light pink" href="#modal4"><i class="material-icons">format_list_bulleted</i></a>
             </td>
             </tr>
-            {% endfor %}
-    {% endif %}
+
     </tbody>
     <div id="modal2" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
-            <form method="put">
+            <form action="{% url 'update' id=sighting.id %}" method="post">
                 {% csrf_token %}
                 {{up_form.as_p}}
                 <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
             </form>
         </div>
     </div>
-                   
+{% endfor %}
+    {% endif %}
     <div id="modal3" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
