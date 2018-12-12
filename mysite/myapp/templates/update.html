@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
 {% load static %}
 <link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
 <title>Update</title>
@@ -21,7 +21,7 @@
 <center>
 <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
 
-    <form action="{% url 'update' id=id %}" method="post" style="width:50%; text-align: center;">
+    <form action="{% url 'update' id=form_id %}" method="post" style="width:50%; text-align: center;">
         {% csrf_token %}
         {{up_form.as_p}}
         <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
