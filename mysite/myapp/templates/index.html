@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Flowers Database</title>
-    <link rel="stylesheet" href="style/main.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "myapp/style/main.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% load static %}
     <link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
 </head>
+<style>
+#table2{
+    display:none;
+}
+#table3{
+    display:none;
+}
+</style>
 <body>
 <div class="navbar-fixed">
-    <nav class="black">
+    <nav class="grey darken-3">
         <div class="container">
             <div class="nav-wrapper">
                 <a href = "img/favicon.ico"></a>
@@ -27,19 +36,6 @@
                         <li><a href="{% url 'login' %}">Login</a></li>
                         <li><a href="{% url 'register' %}">Register</a></li>
                     {% endif %}
-
-                    <!--<li>
-                        <div class="center row">
-                            <div class="col s12 " >
-                                <div class="row" id="topbarsearch">
-                                    <div class="input-field col s6 s12 light-blue-text">
-                                        <i class="white-text material-icons prefix">search</i>
-                                        <input type="text" placeholder="Search" id="autocomplete-input" class="autocomplete white-text" >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>-->
                 </ul>
             </div>
         </div>
@@ -48,15 +44,24 @@
 <main>
 
 <div class="nav-wrapper">
+    <br>
+    <center>
+        <a class="waves-effect waves-light btn-small grey" style="text-align:center" onclick="table1Visible()">Flowers</a>
+        <a class="waves-effect waves-light btn-small grey" style="text-align:center" onclick="table2Visible()">Sightings</a>
+        <a class="waves-effect waves-light btn-small grey" style="text-align:center" onclick="table3Visible()">Features</a>
+    </center>
+
     <form>
-        <div class="input-field" onkeyup='searchTable()'>
+        <div class="input-field" onkeyup='searchTable()' id="bar">
           <input id="search" type="search" placeholder="Search for a flower name..." required>
           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
         </div>
     </form>
+
 </div>
 
+<div id = "table1">
 <table class = "centered" id = "table">
     <thead>
     <tr>
@@ -104,17 +109,67 @@
             <img src = "{% static "myapp/img/flowers2.jpg" %}" alt="Flower pic" height="400" width="650">
         </div>
     </div>
-<!--     <div id="modal4" class="modal">
-        <div class="modal-content">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
-            <h5><span style="font-size: 18px">10 Most Recent Sightings</span></h5>
-            <a > Load sightings </a>
-        </div>
-    </div> -->
 </table>
+</div>
+
+<div id = "table2">
+<table class="centered" id = "table">
+    <thead>
+    <tr>
+        <th>Flower Name</th>
+        <th>Person</th>
+        <th>Location</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% if sight %}
+            {% for s in sight %}
+            <tr>
+                <td id = "tableName">{{ s.name }}</td>
+                <td id = "tableName">{{ s.person }}</td>
+                <td id = "tableName">{{ s.location }}</td>
+                <td id = "tableName">{{ s.sighted }}</td>
+            </tr>
+    </tbody>
+{% endfor %}
+    {% endif %}
+</table>
+</div>
+
+<div id = "table3">
+<table class="centered" id = "table">
+    <thead>
+    <tr>
+        <th>Location</th>
+        <th>Class</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Map</th>
+        <th>Elevation</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% if features %}
+            {% for feature in features %}
+            <tr>
+                <td id = "tableName">{{ feature.location }}</td>
+                <td id = "tableName">{{ feature.class_field }}</td>
+                <td id = "tableName">{{ feature.latitude }}</td>
+                <td id = "tableName">{{ feature.longitude }}</td>
+                <td id = "tableName">{{ feature.map }}</td>
+                <td id = "tableName">{{ feature.elev }}</td>
+            </tr>
+    </tbody>
+{% endfor %}
+    {% endif %}
+</table>
+</div>
 
 <br>
-<a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px;"><i class="material-icons">add</i></a>
+<a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px; position:fixed; bottom:10px; left:0;"><i class="material-icons">add</i></a>
     <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -130,12 +185,67 @@
 </div>
 <br><br>
 </main>
-<footer class="section page-footer black">
+<footer class="section page-footer grey darken-3">
     <div class="container center-align"> Created by: Samantha Lieberman and Daniel Tymecki </div>
 </footer>
 </body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+function searchTable() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    console.log("the length is: tr.length");
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
+<script>
+    function table1Visible() {
+        if (document.getElementById('table1')) {
+            if (document.getElementById('table2').style.display != 'none' || document.getElementById('table3').style.display != 'none') {
+                document.getElementById('table2').style.display = 'none';
+                document.getElementById('table3').style.display = 'none';
+                document.getElementById('table1').style.display = 'block';
+                document.getElementById('bar').style.display = 'block';
+            }
+        }
+    }
+    function table2Visible() {
+        if (document.getElementById('table2')) {
+            if (document.getElementById('table1').style.display != 'none' || document.getElementById('table3').style.display != 'none') {
+                document.getElementById('table1').style.display = 'none';
+                document.getElementById('table3').style.display = 'none';
+                document.getElementById('table2').style.display = 'block';
+                document.getElementById('bar').style.display = 'none';
+            }
+        }
+    }
+    function table3Visible() {
+        if (document.getElementById('table3')) {
+            if (document.getElementById('table1').style.display != 'none' || document.getElementById('table2').style.display != 'none') {
+                document.getElementById('table1').style.display = 'none';
+                document.getElementById('table2').style.display = 'none';
+                document.getElementById('table3').style.display = 'block';
+                document.getElementById('bar').style.display = 'none';
+            }
+        }
+    }
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.modal');

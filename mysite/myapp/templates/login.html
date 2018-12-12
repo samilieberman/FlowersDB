@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<title>Login</title>
+{% load static %}
+<link rel="stylesheet" href="{% static "myapp/style/auth.css" %}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+{% load static %}
+<link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
+</head>
 <style>
     body {
         display: flex;
         min-height: 100vh;
         flex-direction: column;
-    }
-    img[src="flowers2.jpg"] {
-        -webkit-filter: blur(2px);
     }
     main {
         flex: 1 0 auto;
@@ -21,20 +25,11 @@
         background: #fff;
     }
 
-    .input-field input[type=date]:focus + label,
-    .input-field input[type=text]:focus + label,
-    .input-field input[type=email]:focus + label,
-    .input-field input[type=password]:focus + label {
-        color: #01579b;
+    .container {
+        margin: 0 auto;
+        width: 50%;
     }
 
-    .input-field input[type=date]:focus,
-    .input-field input[type=text]:focus,
-    .input-field input[type=email]:focus,
-    .input-field input[type=password]:focus {
-        border-bottom: 2px solid #01579b;
-        box-shadow: none;
-    }
 </style>
 </head>
 
@@ -46,13 +41,19 @@
         <div class="section"></div>
 
         <div class="container">
-            <div class="container">
-                {% block title %}Login{% endblock %}
-                {% block content %}
-                <form class="col s6" method="post" id="login">
-                     {% csrf_token %}
-                     {{ form.as_p }}
+            <div class="col s12 m6">
+            <div class="card grey lighten-3">
+                <div class="card-content light-blue-text">
+                    <h2 style="font-family: Consolas,monaco,monospace;"> LOGIN </h2>
+                    {% block content %}
 
+                    <form class="col s6" method="post" id="login" style="padding-left:150px; padding-right: 150px;">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                    <div class='row'>
+                        <a href="/register/"> Don't have an account? Register here </a>
+                    </div>
                     <div class='row'>
                         <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect light-blue'>Login</button>
                     </div>
@@ -61,10 +62,11 @@
                     </div>
                 </form>
                 {% endblock %}
-                <div class="section"></div>
-                <div class="section"></div>
+            </div>
+            </div>
         </div>
-
+        <div class="section"></div>
+        </div>
     </div>
 </main>
 

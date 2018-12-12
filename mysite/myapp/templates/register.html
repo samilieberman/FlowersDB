@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<title>Register</title>
+{% load static %}
+<link rel="stylesheet" href="{% static "myapp/style/auth.css" %}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+{% load static %}
+    <link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
+</head>
 <style>
     body {
         display: flex;
@@ -20,54 +27,51 @@
     body {
         background: #fff;
     }
-
-    .input-field input[type=date]:focus + label,
-    .input-field input[type=text]:focus + label,
-    .input-field input[type=email]:focus + label,
-    .input-field input[type=username]:focus + label,
-    .input-field input[type=password]:focus + label {
-        color: #01579b;
+    .helptext{
+        visibility: hidden;
+    }
+    .container {
+        margin: 0 auto;
+        width: 50%;
     }
 
-    .input-field input[type=date]:focus,
-    .input-field input[type=text]:focus,
-    .input-field input[type=email]:focus,
-    .input-field input[type=username]:focus,
-    .input-field input[type=password]:focus {
-        border-bottom: 2px solid #01579b;
-        box-shadow: none;
-    }
 </style>
 </head>
 
 <body>
 <main>
     <div style="text-align: center;">
-        <!--<img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" />-->
         <div class="section"></div>
-
-
-        <div class="section"></div>
-
         <div class="container">
-            {% block title %}Register{% endblock %}
-                {% block content %}
-                <form class="col s6" method="post" id="hi">
-                     {% csrf_token %}
-                     {{ form3.as_p }}
+            <div class="col s12 m6">
+            <div class="card grey lighten-3">
+                <div class="card-content light-blue-text">
+                    <h2 style="font-family: Consolas,monaco,monospace;"> REGISTER </h2>
+                    <div class="section"></div>
+
+                    {% block content %}
+                    <form class="col s12" method="post" id="reg" style="padding-left:150px; padding-right: 150px;">
+                     <div class="row">
+                            {% csrf_token %}
+                            {{ form3.as_p }}
+                    </div>
 
                     <div class='row'>
                         <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect light-blue'>Register</button>
                     </div>
+
                     <div class='row'>
                         <a href="{% url 'index' %}" class="waves-effect waves-effect light-blue btn">Back</a>
                     </div>
                 </form>
                 {% endblock %}
-                <div class="section"></div>
-                <div class="section"></div>
-        </div>
 
+            </div>
+            </div>
+        </div>
+        <div class="section"></div>
+
+        </div>
     </div>
 </main>
 

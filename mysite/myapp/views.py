@@ -41,13 +41,15 @@ def index(request, top10=None):
             print(sightings.id)
             print(sightings.name)
 
+    sight = Sightings.objects.all()
+    features = Features.objects.all()
     latest_sightings = Flowers.objects.all()
     
     if top10 != None:
-        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2,'top10': top10}
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2,'top10': top10, 'sight': sight, 'features': features}
     
     else:
-        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2, 'sight': sight, 'features': features}
     
     
     return render(request, 'index.html', context)
@@ -82,7 +84,7 @@ def delete(request, id=None):
 def recent(request, id=None):
     # SELECT * FROM 'SIGHTINGS' where NAME = "California flannelbush" order by [sighted] desc limit 10;
     inst = Flowers.objects.get(id=id)
-    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10",[inst.comname])
+    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY SIGHTED DESC LIMIT 10",[inst.comname])
 
     # top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = 'California flannelbush' ORDER BY SIGHTED DESC LIMIT 10")
     # print(top10)
