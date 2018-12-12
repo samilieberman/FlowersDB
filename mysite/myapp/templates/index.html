@@ -17,6 +17,9 @@
 #table3{
     display:none;
 }
+#add{
+    display:none;
+}
 </style>
 <body>
 <div class="navbar-fixed">
@@ -168,7 +171,9 @@
 </div>
 
 <br>
-<a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px; position:fixed; bottom:10px; left:0;"><i class="material-icons">add</i></a>
+<div id = "add">
+    <a class="btn-floating btn-large modal-trigger waves-effect waves-light green" href="#modal1" style="margin-left:10px; position:fixed; bottom:10px; left:0;"><i class="material-icons">add</i></a>
+</div>
     <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
@@ -221,6 +226,7 @@ function searchTable() {
                 document.getElementById('table3').style.display = 'none';
                 document.getElementById('table1').style.display = 'block';
                 document.getElementById('bar').style.display = 'block';
+                document.getElementById('add').style.display = 'none';
             }
         }
     }
@@ -231,6 +237,8 @@ function searchTable() {
                 document.getElementById('table3').style.display = 'none';
                 document.getElementById('table2').style.display = 'block';
                 document.getElementById('bar').style.display = 'none';
+                document.getElementById('add').style.display = 'block';
+
             }
         }
     }
@@ -241,6 +249,7 @@ function searchTable() {
                 document.getElementById('table2').style.display = 'none';
                 document.getElementById('table3').style.display = 'block';
                 document.getElementById('bar').style.display = 'none';
+                document.getElementById('add').style.display = 'none';
             }
         }
     }

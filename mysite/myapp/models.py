@@ -33,7 +33,7 @@ class Sightings(models.Model):
     name = models.CharField(db_column='NAME', max_length=30, blank=True, null=True)  # Field name made lowercase.
     person = models.CharField(db_column='PERSON', max_length=30, blank=True, null=True)  # Field name made lowercase.
     location = models.CharField(db_column='LOCATION', max_length=30, blank=True, null=True)  # Field name made lowercase.
-    sighted = models.DateField(db_column='SIGHTED', blank=True, null=True)  # Field name made lowercase.
+    sighted = models.TextField(db_column='SIGHTED', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = True
