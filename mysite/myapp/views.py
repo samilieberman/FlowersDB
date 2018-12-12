@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from tablib import Dataset
 from myapp.resources import *
+import csv
 
 # Create your views here.
 
@@ -41,6 +42,10 @@ def index(request):
         form2 = UpdateForm(prefix='update')
 
     latest_sightings = Sightings.objects.all()
+    for sightings in latest_sightings:
+        print(sightings.id)
+        print(sightings.name)
+
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
     return render(request, 'index.html', context)
 
@@ -77,14 +82,14 @@ def update(request, id=None):
 
 def upload(request):
     if request.method == 'POST':
-        person_resource = SightingResource()
+        sighting_resource = SightingResource()
         dataset = Dataset()
-        new_persons = request.FILES['myfile']
+        new_sight = request.FILES['myfile']
 
-        imported_data = dataset.load(new_persons.read())
-        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+        imported_data = dataset.load(new_sight.read())
+        result = sighting_resource.import_data(dataset, dry_run=True)  # Test the data import
 
         if not result.has_errors():
-            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+            sighting_resource.import_data(dataset, dry_run=False)  # Actually import now
 
     return render(request, 'upload.html')

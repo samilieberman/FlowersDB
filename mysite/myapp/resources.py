@@ -1,11 +1,9 @@
 from import_export import resources
-from .models import *
+from models import *
 
 class SightingResource(resources.ModelResource):
-    class Meta:
-        model = Sightings
-       	exclude = ('id',)
-       	import_id_fields = ('NAME','PERSON','LOCATION','SIGHTED')
+	class Meta:
+		model = Sightings
 
 class FlowerResource(resources.ModelResource):
     class Meta:
