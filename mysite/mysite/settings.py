@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
-    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -121,4 +120,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
-IMPORT_EXPORT_USE_TRANSACTIONS = True

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    img[src="flowers2.jpg"] {
+        -webkit-filter: blur(2px);
+    }
+    main {
+        flex: 1 0 auto;
+        /*background-image: url('img/flowers2.jpg');*/
+        background:white;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .input-field input[type=date]:focus + label,
+    .input-field input[type=text]:focus + label,
+    .input-field input[type=email]:focus + label,
+    .input-field input[type=username]:focus + label,
+    .input-field input[type=password]:focus + label {
+        color: #01579b;
+    }
+
+    .input-field input[type=date]:focus,
+    .input-field input[type=text]:focus,
+    /*.input-field input[type=email]:focus,*/
+    .input-field input[type=username]:focus,
+    .input-field input[type=password]:focus {
+        border-bottom: 2px solid #01579b;
+        box-shadow: none;
+    }
+</style>
+</head>
+
+<body>
+<main>
+    <div style="text-align: center;">
+        <!--<img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" />-->
+        <div class="section"></div>
+
+
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 25px 120px 0px 120px; border: 1px solid #EEE;">
+
+                <form class="col s12" method="post" id="hi">
+                    <div class='row'>
+                        <div class='col s12'>
+                        </div>
+                    </div>
+                    <h5 class="light-blue-text">Register</h5>
+                    <br>
+
+<!--                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='email' name='password' id='email' />
+                            <label for='username'>Enter your email</label>
+                        </div>
+                    </div>-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='email' name='password' id='username' />
+                            <label for='username'>Enter your username</label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' name='password' id='password' />
+                            <label for='password'>Enter your password</label>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class='row'>
+                        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect light-blue'>Register</button>
+                    </div>
+                    <div class='row'>
+                        <a href="index.html" class="waves-effect waves-effect light-blue btn">Back</a>
+                    </div>
+                </form>
+                <div class="section"></div>
+                <div class="section"></div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script>
+    /*var main = function() {
+
+        var people = [];
+
+        var cookies = [];
+
+        $('#email').val("");
+        $('#username').val("");
+        $('#password').val("");
+
+        function Person(username, email, password, repeat_password) {
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
+
+        $('#register').click(function() {
+
+            var username = $('#username').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            if( email==="" || username==="" || password==="") {
+                $('#error').text("You didn't fill everything");
+            }
+
+            else {
+
+                people[people.length] = new Person(username, email, password);
+
+                for(var key in people) {
+                    //This should check weather this username was used before but I'm not really sure what to insert instead of "name"
+                    if(people[people.length - 1].username === "name") {
+                        $('#error').text("This username is already in use");
+                        break;
+                    }
+                    else if(password !== r_password) {
+                        $('#error').text("Passwords don't match");
+                        break;
+                    }
+                    else {
+                        document.cookie = email;
+                        cookies[cookies.length] = document.cookie;
+                        $('#error').text("Your registration is complete.");
+                        break;
+                    }
+                }
+
+            }
+
+        });
+
+
+        $('.btn').click(function() {
+            alert(cookies[cookies.length - 1]);
+        });
+
+    };
+    $(document).ready(main);*/
+</script>
+</body>
+</html>

@@ -7,10 +7,6 @@ from .forms import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from tablib import Dataset
-from myapp.resources import *
-import csv
-
 # Create your views here.
 
 
@@ -39,8 +35,11 @@ def index(request, top10=None):
             Sightings.objects.update(name=name, person=person, location=location, sighted=sighted)
 
     else:
-        form2 = UpdateForm(prefix='update')
-
+        form2 = UpdateForm()
+        latest_sightings = Sightings.objects.all()
+        for sightings in latest_sightings:
+            print(sightings.id)
+            print(sightings.name)
 
     latest_sightings = Flowers.objects.all()
     
@@ -53,9 +52,11 @@ def index(request, top10=None):
     
     return render(request, 'index.html', context)
 
+
 def insert(request):
     form = InsertForm()
     return render(request, 'insert.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -71,6 +72,7 @@ def signup(request):
         r_form = UserCreationForm()
     return render(request, 'register.html', {'form3': r_form})
 
+
 def delete(request, id=None):
     print(id)
     inst = Flowers.objects.filter(id=id)
@@ -83,11 +85,23 @@ def recent(request, id=None):
     top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10",[inst.comname])
 
     # top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = 'California flannelbush' ORDER BY SIGHTED DESC LIMIT 10")
-    print(top10)
+    # print(top10)
     return render(request, 'recent.html', {'top10': top10})
 
 def update(request, id=None):
-    print(id)
+    print('Did this route right????')
     inst = Sightings.objects.filter(id=id)
     inst.update()
     return redirect("index")
+
+    form = UpdateForm(request.POST)
+    if form.is_valid():
+        #inst = form.save()
+        # inst.save()
+        print('Name after: ', Sightings._meta.get_field('name'))
+
+    form = InsertForm(prefix='insert')
+    form2 = UpdateForm()
+    latest_sightings = Sightings.objects.all()
+    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
+    return render(request, "index.html", context)

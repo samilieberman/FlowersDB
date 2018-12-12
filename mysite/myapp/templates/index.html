@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Flowers Database</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "myapp/style/main.css" %}">
+    <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% load static %}
@@ -12,7 +11,7 @@
 </head>
 <body>
 <div class="navbar-fixed">
-    <nav class="grey darken-3">
+    <nav class="black">
         <div class="container">
             <div class="nav-wrapper">
                 <a href = "img/favicon.ico"></a>
@@ -76,26 +75,27 @@
             <td id = "tableName">{{ sightings.genus }}</td>
             <td id = "tableName">{{ sightings.species }}</td>
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sightings.id %}"><i class="material-icons">delete</i></a>
+
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light pink" href="{% url 'recent' id=sightings.id %}"><i class="material-icons">format_list_bulleted</i></a>
             </td>
             </tr>
-            {% endfor %}
-    {% endif %}
+
     </tbody>
     <div id="modal2" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
-            <form method="put">
+            <form action="{% url 'update' id=sightings.id %}" method="post">
                 {% csrf_token %}
                 {{up_form.as_p}}
                 <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
             </form>
         </div>
     </div>
-                   
+{% endfor %}
+    {% endif %}
     <div id="modal3" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
@@ -130,36 +130,12 @@
 </div>
 <br><br>
 </main>
-<footer class="section page-footer grey darken-3">
+<footer class="section page-footer black">
     <div class="container center-align"> Created by: Samantha Lieberman and Daniel Tymecki </div>
 </footer>
 </body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-function searchTable() {
-  // Declare variables 
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("search");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("table");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    console.log("the length is: tr.length");
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    } 
-  }
-}
-</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.modal');
