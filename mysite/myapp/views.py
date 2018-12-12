@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 
-def index(request):
+def index(request, top10=None):
     if request.method == 'POST':
         form = InsertForm(request.POST, prefix='insert')
         if form.is_valid():
@@ -24,13 +24,32 @@ def index(request):
     else:
         form = InsertForm(prefix='insert')
 
-    form2 = UpdateForm()
-    latest_sightings = Sightings.objects.all()
-    for sightings in latest_sightings:
-        print(sightings.id)
-        print(sightings.name)
+    if request.method == 'PUT':
+        form2 = UpdateForm(request.PUT, prefix='update')
+        if form2.is_valid():
+            name = form2.cleaned_data['name']
+            person = form2.cleaned_data['person']
+            location = form2.cleaned_data['location']
+            sighted = form2.cleaned_data['sighted']
+            print('Updating new entry in sightings: ', name, person, location, sighted)
+            Sightings.objects.update(name=name, person=person, location=location, sighted=sighted)
 
-    context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
+    else:
+        form2 = UpdateForm()
+        latest_sightings = Sightings.objects.all()
+        for sightings in latest_sightings:
+            print(sightings.id)
+            print(sightings.name)
+
+    latest_sightings = Flowers.objects.all()
+    
+    if top10 != None:
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2,'top10': top10}
+    
+    else:
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
+    
+    
     return render(request, 'index.html', context)
 
 
@@ -56,14 +75,25 @@ def signup(request):
 
 def delete(request, id=None):
     print(id)
-    inst = Sightings.objects.filter(id=id)
+    inst = Flowers.objects.filter(id=id)
     inst.delete()
     return redirect("index")
 
+def recent(request, id=None):
+    # SELECT * FROM 'SIGHTINGS' where NAME = "California flannelbush" order by [sighted] desc limit 10;
+    inst = Flowers.objects.get(id=id)
+    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10",[inst.comname])
+
+    # top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = 'California flannelbush' ORDER BY SIGHTED DESC LIMIT 10")
+    # print(top10)
+    return render(request, 'recent.html', {'top10': top10})
 
 def update(request, id=None):
     print('Did this route right????')
     inst = Sightings.objects.filter(id=id)
+    inst.update()
+    return redirect("index")
+
     form = UpdateForm(request.POST)
     if form.is_valid():
         #inst = form.save()
@@ -75,18 +105,3 @@ def update(request, id=None):
     latest_sightings = Sightings.objects.all()
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
     return render(request, "index.html", context)
-
-
-def upload(request):
-    if request.method == 'POST':
-        sighting_resource = SightingResource()
-        dataset = Dataset()
-        new_sight = request.FILES['myfile']
-
-        imported_data = dataset.load(new_sight.read())
-        result = sighting_resource.import_data(dataset, dry_run=True)  # Test the data import
-
-        if not result.has_errors():
-            sighting_resource.import_data(dataset, dry_run=False)  # Actually import now
-
-    return render(request, 'upload.html')
