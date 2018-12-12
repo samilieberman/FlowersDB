@@ -99,5 +99,5 @@ def update(request, id=None):
 
 def update_form(request, id=None):
     form2 = UpdateForm()
-    context = {'up_form':form2, 'id':id}
+    context = {'up_form':form2, 'id': id}
     return render(request, "update.html", context)
