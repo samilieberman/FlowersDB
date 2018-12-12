@@ -11,10 +11,10 @@ class InsertForm(forms.Form):
 
 
 class UpdateForm(ModelForm):
+    comname = forms.CharField(max_length=30)
     genus = forms.CharField(max_length=30)
     species = forms.CharField(max_length=30)
-    comname = forms.CharField(max_length=30)
 
     class Meta:
         model = Flowers
-        fields = ['genus', 'species', 'comname']
+        fields = ['comname', 'genus', 'species']
