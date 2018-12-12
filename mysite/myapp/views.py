@@ -100,6 +100,7 @@ def update(request, id=None):
 
 
 def update_form(request, id=None):
-    form2 = UpdateForm()
+    test = get_object_or_404(Flowers, id=id)
+    form2 = UpdateForm(instance=test)
     context = {'up_form': form2, 'form_id': id}
     return render(request, "update.html", context)
