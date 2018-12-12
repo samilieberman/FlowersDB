@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<title>10 Most Recent Sightings</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+{% load static %}
+<link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
+</head>
+<header><span style="font-size: 18px; margin-left:20px">10 Most Recent Sightings</span></header>
+<body>
+<ul class="collection">
+    {% for entry in top10 %}
+     	 <li class="collection-item avatar">
+      		<!-- <i class="material-icons circle grey">camera_alt</i> -->
+      		{% load static %}
+      		<img src="{% static "myapp/img/flower.png" %}" alt="" class="circle">
+      		<span class="title">Name: {{ entry.name }}</span>
+      		<p>Person: {{ entry.person }} <br>
+         	Location: {{ entry.location }}
+      		</p>
+    	</li>
+    {% endfor %}
+</ul>
+<div class='row'>
+    <a href="{% url 'index' %}" class="waves-effect waves-effect light-blue btn" style="margin-left:20px">Back</a>
+</div>
+</body>
+</html>
