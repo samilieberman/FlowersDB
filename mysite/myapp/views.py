@@ -35,6 +35,8 @@ def index(request, top10=None):
     else:
         form2 = UpdateForm()
 
+    sight = Sightings.objects.all()
+    features = Features.objects.all()
     latest_sightings = Flowers.objects.all()
 
     if top10 != None:
@@ -76,7 +78,7 @@ def delete(request, id=None):
 def recent(request, id=None):
     # SELECT * FROM 'SIGHTINGS' where NAME = "California flannelbush" order by [sighted] desc limit 10;
     inst = Flowers.objects.get(id=id)
-    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10", [inst.comname])
+    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY SIGHTED DESC LIMIT 10", [inst.comname])
 
     # top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = 'California flannelbush' ORDER BY SIGHTED DESC LIMIT 10")
     # print(top10)
