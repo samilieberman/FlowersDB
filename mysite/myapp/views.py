@@ -40,11 +40,10 @@ def index(request, top10=None):
     latest_sightings = Flowers.objects.all()
 
     if top10 != None:
-        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2, 'top10': top10}
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2, 'top10': top10, 'sight': sight, 'features': features}
 
     else:
-        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
-
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2, 'sight': sight, 'features': features}
     return render(request, 'index.html', context)
 
 
