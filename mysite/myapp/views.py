@@ -83,7 +83,6 @@ def recent(request, id=None):
     # print(top10)
     return render(request, 'recent.html', {'top10': top10})
 
-
 def update(request, id=None):
     test = get_object_or_404(Flowers, id=id)
     print('Test id: ', id)
@@ -96,4 +95,9 @@ def update(request, id=None):
     form2 = UpdateForm()
     latest_sightings = Flowers.objects.all()
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
-    return render(request, "index.html", context)
+    return render(request, "update.html", context)
+
+def update_form(request, id=None):
+    form2 = UpdateForm()
+    context = {'up_form':form2, 'id':id}
+    return render(request, "update.html", context)

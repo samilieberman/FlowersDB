@@ -40,7 +40,6 @@ class Sightings(models.Model):
         db_table = 'SIGHTINGS'
         unique_together = (('name', 'person', 'location', 'sighted'),)
 
-
 class Users(models.Model):
     username = models.TextField(unique=True)  # This field type is a guess.
     email = models.TextField()  # This field type is a guess.

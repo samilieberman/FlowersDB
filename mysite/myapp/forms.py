@@ -18,8 +18,3 @@ class UpdateForm(ModelForm):
     class Meta:
         model = Flowers
         fields = ['genus', 'species', 'comname']
-
-    # def __init__(self, *args, **kwargs):
-    #     request = kwargs.pop('request')
-    #     self.user = request.user
-    #     super(UpdateForm, self).__init__(*args, **kwargs)

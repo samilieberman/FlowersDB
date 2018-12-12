@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+{% load static %}
+<link rel="icon" href="{% static "myapp/img/favicon.ico" %}" type="image/x-icon"/>
+<title>Update</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+</head>
+
+<body>
+<nav class="grey darken-3">
+    <div class="nav-wrapper">
+        <a class="brand-logo" style="margin-left:20px;">Update</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+        			<li><a href="{% url 'index' %}">Back</a></li>
+      		</ul>
+	</div>
+</nav>
+<main>
+<center>
+<h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
+
+    <form action="{% url 'update' id=id %}" method="post" style="width:50%; text-align: center;">
+        {% csrf_token %}
+        {{up_form.as_p}}
+        <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
+    </form>
+    </center>
+</main>
+</body>
+</html>

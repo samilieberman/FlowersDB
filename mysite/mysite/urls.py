@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/delete/$', v.delete, name='delete'),
     url(r'^(?P<id>\d+)/recent/$', v.recent, name='recent'),
     url(r'^(?P<id>\d+)/update/$', v.update, name='update'),
+    url(r'^(?P<id>\d+)/form/update/$', v.update_form, name='updateForm'),
     url(r'', include('myapp.urls')),
 ]
