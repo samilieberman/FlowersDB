@@ -11,6 +11,15 @@ class InsertForm(forms.Form):
 
 
 class UpdateForm(ModelForm):
+    genus = forms.CharField(max_length=30)
+    species = forms.CharField(max_length=30)
+    comname = forms.CharField(max_length=30)
+
     class Meta:
-        model = Sightings
-        fields = ['name', 'person', 'location', 'sighted']
+        model = Flowers
+        fields = ['genus', 'species', 'comname']
+
+    # def __init__(self, *args, **kwargs):
+    #     request = kwargs.pop('request')
+    #     self.user = request.user
+    #     super(UpdateForm, self).__init__(*args, **kwargs)

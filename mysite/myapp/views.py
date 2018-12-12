@@ -18,7 +18,6 @@ def index(request, top10=None):
             person = form.cleaned_data['person']
             location = form.cleaned_data['location']
             sighted = form.cleaned_data['sighted']
-            print('Inserting new entry in sightings: ', name, person, location, sighted)
             Sightings.objects.create(name=name, person=person, location=location, sighted=sighted)
 
     else:
@@ -31,25 +30,19 @@ def index(request, top10=None):
             person = form2.cleaned_data['person']
             location = form2.cleaned_data['location']
             sighted = form2.cleaned_data['sighted']
-            print('Updating new entry in sightings: ', name, person, location, sighted)
             Sightings.objects.update(name=name, person=person, location=location, sighted=sighted)
 
     else:
         form2 = UpdateForm()
-        latest_sightings = Sightings.objects.all()
-        for sightings in latest_sightings:
-            print(sightings.id)
-            print(sightings.name)
 
     latest_sightings = Flowers.objects.all()
-    
+
     if top10 != None:
-        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2,'top10': top10}
-    
+        context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2, 'top10': top10}
+
     else:
         context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
-    
-    
+
     return render(request, 'index.html', context)
 
 
@@ -79,29 +72,27 @@ def delete(request, id=None):
     inst.delete()
     return redirect("index")
 
+
 def recent(request, id=None):
     # SELECT * FROM 'SIGHTINGS' where NAME = "California flannelbush" order by [sighted] desc limit 10;
     inst = Flowers.objects.get(id=id)
-    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10",[inst.comname])
+    top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = %s ORDER BY sighted DESC LIMIT 10", [inst.comname])
 
     # top10 = Sightings.objects.raw("SELECT * FROM Sightings WHERE NAME = 'California flannelbush' ORDER BY SIGHTED DESC LIMIT 10")
     # print(top10)
     return render(request, 'recent.html', {'top10': top10})
 
-def update(request, id=None):
-    print('Did this route right????')
-    inst = Sightings.objects.filter(id=id)
-    inst.update()
-    return redirect("index")
 
-    form = UpdateForm(request.POST)
+def update(request, id=None):
+    test = get_object_or_404(Flowers, id=id)
+    print('Test id: ', id)
+    form = UpdateForm(data=request.POST or None, instance=test)
     if form.is_valid():
-        #inst = form.save()
-        # inst.save()
-        print('Name after: ', Sightings._meta.get_field('name'))
+        inst = form.save()
+        redirect("index")
 
     form = InsertForm(prefix='insert')
     form2 = UpdateForm()
-    latest_sightings = Sightings.objects.all()
+    latest_sightings = Flowers.objects.all()
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
     return render(request, "index.html", context)
