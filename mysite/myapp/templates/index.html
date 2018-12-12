@@ -80,14 +80,14 @@
             <td id = "tableName">{{ sightings.genus }}</td>
             <td id = "tableName">{{ sightings.species }}</td>
             <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'delete' id=sightings.id %}"><i class="material-icons">delete</i></a>
-                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="#modal2"><i class="material-icons">edit</i></a>
+                <a class="btn-floating btn-small modal-trigger waves-effect waves-light yellow" href="{% url 'updateForm' id=sightings.id %}"><i class="material-icons">edit</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light blue" href="#modal3"><i class="material-icons">photo_library</i></a>
                 <a class="btn-floating btn-small modal-trigger waves-effect waves-light pink" href="{% url 'recent' id=sightings.id %}"><i class="material-icons">format_list_bulleted</i></a>
             </td>
             </tr>
 
     </tbody>
-    <div id="modal2" class="modal">
+   <!--  <div id="modal2" class="modal">
         <div class="modal-content">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="float:right"><i class="material-icons prefix">close</i></a>
             <h5><span style="font-size: 18px">Update the Sightings database...</span></h5>
@@ -97,7 +97,7 @@
                 <button class="btn waves-effect waves-light green" type="submit" name="action">Update</button>
             </form>
         </div>
-    </div>
+    </div> -->
 {% endfor %}
     {% endif %}
     <div id="modal3" class="modal">

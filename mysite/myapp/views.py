@@ -91,7 +91,6 @@ def recent(request, id=None):
     return render(request, 'recent.html', {'top10': top10})
 
 def update(request, id=None):
-    print('Did this route right????')
     inst = Sightings.objects.filter(id=id)
     inst.update()
     return redirect("index")
@@ -106,4 +105,9 @@ def update(request, id=None):
     form2 = UpdateForm()
     latest_sightings = Sightings.objects.all()
     context = {'latest_sightings': latest_sightings, 'form': form, 'up_form': form2}
-    return render(request, "index.html", context)
+    return render(request, "update.html", context)
+
+def update_form(request, id=None):
+    form2 = UpdateForm()
+    context = {'up_form':form2, 'id':id}
+    return render(request, "update.html", context)
